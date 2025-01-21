@@ -1,0 +1,35 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Newsletter {
+  id               Int       @id @default(autoincrement())  
+  email            String    @unique 
+  nome             String?                       
+  ativo            Boolean   @default(false)                              
+  newsletterAssinada Boolean  @default(false)           
+  emailConfirmado  Boolean   @default(false)               
+  preferencias     String? 
+  dataUltimaEnvio  DateTime? 
+  horarioDeRegistro DateTime  @default(now())   
+}
+
+model news {
+  id             Int      @id @default(autoincrement())
+  titulo         String
+  descricao      String  @db.VarChar(1200)
+  url            String  @db.VarChar(1500)
+  imagem         String  @db.VarChar(1500)
+  dataPublicacao DateTime
+  fonte          String?
+  autor          String?
+  categoria      String?
+  language       String?   
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
